@@ -43,7 +43,6 @@ public class RateLimiterService implements IRateLimiterService {
 		long start = user.getTimeStamp();
 		long end = System.currentTimeMillis();
 		long elapsedTime = end - start;
-		System.out.println(elapsedTime);
 		if(elapsedTime>10000) {
 			return false;
 		}
