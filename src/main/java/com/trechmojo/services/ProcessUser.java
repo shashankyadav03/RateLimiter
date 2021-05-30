@@ -20,7 +20,7 @@ public class ProcessUser implements IProcessUser {
 	public Boolean processSignup(User usersignup) {
 		if(usersignup==null)
 			return false;
-		if(usersignup.getPassword().equals(usersignup.getRepassword())) {
+		if(usersignup.getPassword().length()>1&&usersignup.getPassword().equals(usersignup.getRepassword())) {
 			return userRepository.setuser(usersignup.getUsername(), usersignup.getPassword());
 		}
 		return false;
@@ -33,15 +33,25 @@ public class ProcessUser implements IProcessUser {
 		return userRepository.checkCredencials(user.getUsername(),user.getPassword());
 	}
 
-
 	@Override
-	public Boolean processSearch(User user,Search search) {
-		if(search==null)
+	public void createAdmin() {
+		User admin = new User();
+		admin.setUsername("admin");
+		admin.setPassword("admin");
+		admin.setRepassword("admin");
+		processSignup(admin);
+	}
+	
+	@Override
+	public Boolean processSearch(User user,String place) {
+		if(place==null||user==null)
 			return false;
-		if(search.getPlace().length()<3) {
+		if(place.length()<3) {
 				return false;
 		}
 		return rateLimiterService.checkRate(user);
 	}
+
+	
 
 }

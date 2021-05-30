@@ -3,6 +3,8 @@ package com.techmojo.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.trechmojo.services.ApiService;
+import com.trechmojo.services.IApiService;
 import com.trechmojo.services.IProcessUser;
 import com.trechmojo.services.IRateLimiterService;
 import com.trechmojo.services.ProcessUser;
@@ -25,5 +27,10 @@ public class ProcessConfig {
 	@Bean
 	public IRateLimiterService rateLimiterService() {
 		return new RateLimiterService();
+	}
+	
+	@Bean
+	public IApiService apiService() {
+		return new ApiService();
 	}
 }

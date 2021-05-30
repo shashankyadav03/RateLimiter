@@ -13,7 +13,7 @@ public class RateLimiterService implements IRateLimiterService {
 	private Integer limit;
 	
 	@Value("${rateLimiter.time}")
-	private Integer time;
+	private long time;
 	
 	@Override
 	public Boolean userActivity(User user) {
