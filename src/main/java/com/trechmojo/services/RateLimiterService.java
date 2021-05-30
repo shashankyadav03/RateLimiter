@@ -12,6 +12,9 @@ public class RateLimiterService implements IRateLimiterService {
 	@Value("${rateLimiter.limit}")
 	private Integer limit;
 	
+	@Value("${rateLimiter.time}")
+	private Integer time;
+	
 	@Override
 	public Boolean userActivity(User user) {
 		
@@ -43,7 +46,7 @@ public class RateLimiterService implements IRateLimiterService {
 		long start = user.getTimeStamp();
 		long end = System.currentTimeMillis();
 		long elapsedTime = end - start;
-		if(elapsedTime>10000) {
+		if(elapsedTime>time) {
 			return false;
 		}
 		return true;
