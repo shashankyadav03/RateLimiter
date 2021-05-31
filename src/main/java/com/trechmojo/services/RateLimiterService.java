@@ -2,18 +2,20 @@ package com.trechmojo.services;
 
 import java.util.HashMap;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.techmojo.config.RateLimitConfig;
 import com.techmojo.model.User;
 
 public class RateLimiterService implements IRateLimiterService {
 	private HashMap<String, User> rateCounter = new HashMap<String,User>();
 	
-	@Value("${rateLimiter.limit}")
-	private Integer limit;
+	@Autowired
+	RateLimitConfig rateLimitConfig;
 	
-	@Value("${rateLimiter.time}")
-	private long time;
+	Logger logger = LoggerFactory.getLogger(RateLimiterService.class);
 	
 	@Override
 	public Boolean userActivity(User user) {
@@ -25,8 +27,9 @@ public class RateLimiterService implements IRateLimiterService {
 				olduser.setTimeStamp(System.currentTimeMillis());
 				rateCounter.put(user.getUsername(),olduser);
 			}
-			else if(olduser.getCounter()>=limit) {
+			else if(olduser.getCounter()>=rateLimitConfig.getLimit()) {
 				olduser.setCounter(olduser.getCounter()+1);
+				logger.info("Limit exceeded, Counter value : {}",olduser.getCounter());
 				rateCounter.put(user.getUsername(),olduser);
 				return false;
 			}
@@ -34,19 +37,23 @@ public class RateLimiterService implements IRateLimiterService {
 				olduser.setCounter(olduser.getCounter()+1);
 				rateCounter.put(user.getUsername(),olduser);
 			}
+			logger.info("Counter value : {}",olduser.getCounter());
 		}
 		else {
 			user.setTimeStamp(System.currentTimeMillis());
 			user.setCounter(1);
+			logger.info("Counter value : {}",user.getCounter());
 			rateCounter.put(user.getUsername(),user);
 		}
+		
 		return true;
 	}
 	private Boolean checkTime(User user) {
 		long start = user.getTimeStamp();
 		long end = System.currentTimeMillis();
 		long elapsedTime = end - start;
-		if(elapsedTime>time) {
+		logger.info("Elapsed Time : {} seconds",elapsedTime/1000);
+		if(elapsedTime>rateLimitConfig.getTime()) {
 			return false;
 		}
 		return true;
