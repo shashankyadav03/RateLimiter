@@ -1,4 +1,4 @@
-package com.trechmojo.application.services;
+package com.techmojo.application.services;
 
 import java.io.IOException;
 import java.io.InputStream;

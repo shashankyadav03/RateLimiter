@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.techmojo.application.model.Search;
 import com.techmojo.application.model.User;
-import com.trechmojo.application.services.IApiService;
-import com.trechmojo.application.services.IProcessUser;
+import com.techmojo.application.services.IApiService;
+import com.techmojo.application.services.IProcessUser;
 
 
 @Controller

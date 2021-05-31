@@ -3,13 +3,14 @@ package com.techmojo.application.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.trechmojo.application.services.ApiService;
-import com.trechmojo.application.services.IApiService;
-import com.trechmojo.application.services.IProcessUser;
-import com.trechmojo.application.services.IRateLimiterService;
-import com.trechmojo.application.services.ProcessUser;
-import com.trechmojo.application.services.RateLimiterService;
-import com.trechmojo.application.services.UserRepositoryService;
+import com.techmojo.application.repository.IUserRepository;
+import com.techmojo.application.services.ApiService;
+import com.techmojo.application.services.IApiService;
+import com.techmojo.application.services.IProcessUser;
+import com.techmojo.application.services.IRateLimiterService;
+import com.techmojo.application.services.ProcessUser;
+import com.techmojo.application.services.RateLimiterService;
+import com.techmojo.application.services.UserRepositoryService;
 
 @Configuration
 public class ProcessConfig {
@@ -20,7 +21,7 @@ public class ProcessConfig {
 	}
 	
 	@Bean
-	public UserRepositoryService userRepositoryService() {
+	public IUserRepository userRepositoryService() {
 		return new UserRepositoryService();
 	}
 	
