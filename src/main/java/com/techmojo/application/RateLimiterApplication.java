@@ -1,4 +1,4 @@
-package com.techmojo;
+package com.techmojo.application;
 
 
 import org.springframework.boot.SpringApplication;

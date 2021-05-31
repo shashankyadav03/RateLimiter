@@ -1,11 +1,11 @@
-package com.trechmojo.services;
+package com.techmojo.application.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.techmojo.model.Search;
-import com.techmojo.model.User;
-import com.techmojo.repository.IUserRepository;
+import com.techmojo.application.model.Search;
+import com.techmojo.application.model.User;
+import com.techmojo.application.repository.IUserRepository;
 
 @Service
 public class ProcessUser implements IProcessUser {
@@ -20,7 +20,7 @@ public class ProcessUser implements IProcessUser {
 	public Boolean processSignup(User usersignup) {
 		if(usersignup==null)
 			return false;
-		if(usersignup.getPassword().equals(usersignup.getRepassword())) {
+		if(usersignup.getPassword().length()>1&&usersignup.getPassword().equals(usersignup.getRepassword())) {
 			return userRepository.setuser(usersignup.getUsername(), usersignup.getPassword());
 		}
 		return false;
@@ -33,15 +33,25 @@ public class ProcessUser implements IProcessUser {
 		return userRepository.checkCredencials(user.getUsername(),user.getPassword());
 	}
 
-
 	@Override
-	public Boolean processSearch(User user,Search search) {
-		if(search==null)
+	public void createAdmin() {
+		User admin = new User();
+		admin.setUsername("admin");
+		admin.setPassword("admin");
+		admin.setRepassword("admin");
+		processSignup(admin);
+	}
+	
+	@Override
+	public Boolean processSearch(User user,String place) {
+		if(place==null||user==null)
 			return false;
-		if(search.getPlace().length()<3) {
+		if(place.length()<3) {
 				return false;
 		}
 		return rateLimiterService.checkRate(user);
 	}
+
+	
 
 }

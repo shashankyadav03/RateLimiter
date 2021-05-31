@@ -1,4 +1,4 @@
-package com.techmojo.model;
+package com.techmojo.application.model;
 
 public class User {
 	

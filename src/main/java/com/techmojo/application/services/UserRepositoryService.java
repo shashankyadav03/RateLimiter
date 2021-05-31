@@ -1,10 +1,10 @@
-package com.trechmojo.services;
+package com.techmojo.application.services;
 
 import java.util.HashMap;
 
 import org.springframework.stereotype.Component;
 
-import com.techmojo.repository.IUserRepository;
+import com.techmojo.application.repository.IUserRepository;
 
 @Component
 public class UserRepositoryService implements IUserRepository{

@@ -1,6 +1,6 @@
-package com.trechmojo.services;
+package com.techmojo.application.services;
 
-import com.techmojo.model.User;
+import com.techmojo.application.model.User;
 
 public interface IRateLimiterService {
 	
