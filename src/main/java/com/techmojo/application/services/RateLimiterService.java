@@ -25,6 +25,7 @@ public class RateLimiterService implements IRateLimiterService {
 			if(!checkTime(olduser)) {
 				olduser.setCounter(1);
 				olduser.setTimeStamp(System.currentTimeMillis());
+				logger.info("Counter Reset Done, Counter Value : {}, TimeStamp : {}",olduser.getCounter(),olduser.getTimeStamp());
 				rateCounter.put(user.getUsername(),olduser);
 			}
 			else if(olduser.getCounter()>=rateLimitConfig.getLimit()) {
