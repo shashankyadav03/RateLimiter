@@ -15,6 +15,7 @@ public class RateLimiterService implements IRateLimiterService {
 	@Autowired
 	RateLimitConfig rateLimitConfig;
 	
+	
 	Logger logger = LoggerFactory.getLogger(RateLimiterService.class);
 	
 	@Override
@@ -49,21 +50,32 @@ public class RateLimiterService implements IRateLimiterService {
 		
 		return true;
 	}
+	
 	private Boolean checkTime(User user) {
 		long start = user.getTimeStamp();
 		long end = System.currentTimeMillis();
 		long elapsedTime = end - start;
-		logger.info("Elapsed Time : {} seconds",elapsedTime/1000);
+		long second = elapsedTime%60000;
+		long minutes = elapsedTime/60000;
+		logger.info("Elapsed Time : {}.{} minutes",minutes,second/6000);
 		if(elapsedTime>rateLimitConfig.getTime()) {
 			return false;
 		}
 		return true;
 	}
+	
 	@Override
 	public Boolean checkRate(User user) {
 		if(user==null)
 			return false;
 		return userActivity(user);
+	}
+	
+	@Override
+	public User getUser(String user) {
+		if(user==null&&rateCounter.containsKey(user))
+			return null;
+		return rateCounter.get(user);
 	}
 
 }

@@ -6,6 +6,7 @@ public interface IRateLimiterService {
 	
 	public Boolean userActivity(User user);
 	public Boolean checkRate(User user);
+	public User getUser(String user);
 	
 
 }

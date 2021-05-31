@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techmojo.application.config.RateLimitConfig;
+import com.techmojo.application.model.User;
 
 
 public class ApiService implements IApiService {
@@ -20,6 +21,8 @@ public class ApiService implements IApiService {
 	@Autowired
 	RateLimitConfig rateLimitConfig;
 	
+	@Autowired
+	IRateLimiterService rateLimiterService;
 	
 	@Override
 	public Map<String, Object> getResult() {
@@ -41,16 +44,30 @@ public class ApiService implements IApiService {
 		
 		return result;
 	}
-	
+	private long remainingTime(String user) {
+		User currentUser=rateLimiterService.getUser(user);
+		long start = currentUser.getTimeStamp();
+		long end = System.currentTimeMillis();
+		long elapsedTime = end - start;
+		long remaining= rateLimitConfig.getTime()-elapsedTime;
+		return remaining;
+	}
+	private String convertTominutes(long time) {
+		long second = time%60000;
+		long minutes = time/60000;
+		return Long.toString(minutes)+"."+Long.toString(second/6000)+" minute";
+		
+	}
 	@Override
 	public Map<String, Object> getError(String user) {
 		Map<String,Object> map = new HashMap<>();
 		//You can convert any Object.
 		map.put("Error","Search Restricted Due to maximum limit reached" );
 		map.put("User", user);
-		long second = rateLimitConfig.getTime()%60000;
-		long minutes = rateLimitConfig.getTime()/60000;
-		map.put("Rate", rateLimitConfig.getLimit().toString()+" per "+Long.toString(minutes)+"."+Long.toString(second/6000)+" minute");
+		String rate=convertTominutes(rateLimitConfig.getTime());
+		map.put("Rate", rateLimitConfig.getLimit().toString()+" per "+rate);
+		String timeleft=convertTominutes(remainingTime(user));
+		map.put("Time Remaining", timeleft);
 		return map;
 	}
 
