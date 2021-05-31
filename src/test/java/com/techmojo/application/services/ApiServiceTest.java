@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.techmojo.application.config.RateLimitConfig;
+import com.techmojo.application.model.User;
 
 @ExtendWith(MockitoExtension.class)
 public class ApiServiceTest{
@@ -19,6 +20,8 @@ public class ApiServiceTest{
 	@Mock
 	RateLimitConfig rateLimitConfig;
 	
+	@Mock
+	RateLimiterService rateLimiterService;
 	
 	@InjectMocks
 	ApiService apiService;
@@ -34,7 +37,10 @@ public class ApiServiceTest{
 	
 	@Test
 	void getErrorTest() {
-		
+		User user=new User();
+		user.setUsername("TestUser");
+		user.setTimeStamp(System.currentTimeMillis());
+		Mockito.when(rateLimiterService.getUser("TestUser")).thenReturn(user);
 		Mockito.when(rateLimitConfig.getTime()).thenReturn((long) 90000);
 		Map<String,Object> map=apiService.getError("TestUser");
 		assertNotNull(map);
