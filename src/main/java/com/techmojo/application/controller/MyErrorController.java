@@ -1,4 +1,4 @@
-package com.techmojo.controller;
+package com.techmojo.application.controller;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;

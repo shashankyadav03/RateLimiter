@@ -1,6 +1,6 @@
-package com.trechmojo.services;
+package com.trechmojo.application.services;
 
-import com.techmojo.model.User;
+import com.techmojo.application.model.User;
 
 public interface IProcessUser {
 	

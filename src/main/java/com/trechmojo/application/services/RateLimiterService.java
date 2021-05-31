@@ -1,4 +1,4 @@
-package com.trechmojo.services;
+package com.trechmojo.application.services;
 
 import java.util.HashMap;
 
@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.techmojo.config.RateLimitConfig;
-import com.techmojo.model.User;
+import com.techmojo.application.config.RateLimitConfig;
+import com.techmojo.application.model.User;
 
 public class RateLimiterService implements IRateLimiterService {
 	private HashMap<String, User> rateCounter = new HashMap<String,User>();

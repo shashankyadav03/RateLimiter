@@ -1,4 +1,4 @@
-package com.trechmojo.services;
+package com.trechmojo.application.services;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,7 +12,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.techmojo.config.RateLimitConfig;
+import com.techmojo.application.config.RateLimitConfig;
 
 
 public class ApiService implements IApiService {

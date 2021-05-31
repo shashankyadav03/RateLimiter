@@ -1,4 +1,4 @@
-package com.techmojo.controller;
+package com.techmojo.application.controller;
 
 
 
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.techmojo.model.Search;
-import com.techmojo.model.User;
-import com.trechmojo.services.IApiService;
-import com.trechmojo.services.IProcessUser;
+import com.techmojo.application.model.Search;
+import com.techmojo.application.model.User;
+import com.trechmojo.application.services.IApiService;
+import com.trechmojo.application.services.IProcessUser;
 
 
 @Controller

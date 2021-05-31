@@ -1,9 +1,9 @@
-package com.techmojo.config;
+package com.techmojo.application.config;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-import com.techmojo.RateLimiterApplication;
+import com.techmojo.application.RateLimiterApplication;
 
 public class WebInitializer extends SpringBootServletInitializer {   
     @Override

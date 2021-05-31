@@ -1,11 +1,11 @@
-package com.trechmojo.services;
+package com.trechmojo.application.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.techmojo.model.Search;
-import com.techmojo.model.User;
-import com.techmojo.repository.IUserRepository;
+import com.techmojo.application.model.Search;
+import com.techmojo.application.model.User;
+import com.techmojo.application.repository.IUserRepository;
 
 @Service
 public class ProcessUser implements IProcessUser {

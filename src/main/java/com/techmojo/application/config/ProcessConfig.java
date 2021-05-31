@@ -1,15 +1,15 @@
-package com.techmojo.config;
+package com.techmojo.application.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.trechmojo.services.ApiService;
-import com.trechmojo.services.IApiService;
-import com.trechmojo.services.IProcessUser;
-import com.trechmojo.services.IRateLimiterService;
-import com.trechmojo.services.ProcessUser;
-import com.trechmojo.services.RateLimiterService;
-import com.trechmojo.services.UserRepositoryService;
+import com.trechmojo.application.services.ApiService;
+import com.trechmojo.application.services.IApiService;
+import com.trechmojo.application.services.IProcessUser;
+import com.trechmojo.application.services.IRateLimiterService;
+import com.trechmojo.application.services.ProcessUser;
+import com.trechmojo.application.services.RateLimiterService;
+import com.trechmojo.application.services.UserRepositoryService;
 
 @Configuration
 public class ProcessConfig {

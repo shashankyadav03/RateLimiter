@@ -1,4 +1,4 @@
-package com.trechmojo.services;
+package com.trechmojo.application.services;
 
 import java.util.Map;
 

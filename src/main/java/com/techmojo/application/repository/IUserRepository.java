@@ -1,4 +1,4 @@
-package com.techmojo.repository;
+package com.techmojo.application.repository;
 
 public interface IUserRepository {
 	
